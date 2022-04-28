@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+    <script type="text/javascript" src="./js/react.development.js"></script>
+    <script type="text/javascript" src="./js/react-dom.development.js"></script>
+    <script type="text/javascript" src="./js/babel.min.js"></script>
+    <script type="text/javascript" src="./js/prop-types.js"></script>
+    <script type="text/babel">
+        class MyComponent extends React.Component{
+            //createRef 只能存储一个,超过一个就会把前面存储的顶掉
+            ref1 = React.createRef()
+            render(){
+                return <div>
+                        <input ref={this.ref1} type="text"/>&nbsp;
+                        <button onClick={this.alertLeft}>点击显示左侧的值</button>&nbsp;
+                        <input ref={c=>this.right = c} onBlur={this.alertRight} type="text"/>&nbsp;
+                    </div>
+            }
+            alertLeft = ()=>{
+                // alert(this.left.value)
+                alert(this.ref1.current.value)
+            }
+            alertRight = ()=>{
+                alert(this.right.value)
+            }
+        }
+        
+        ReactDOM.render(<MyComponent/>,document.getElementById('test'))
+        
+    </script>
+</body>
+</html>

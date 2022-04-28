@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+    <script type="text/javascript" src="./js/react.development.js"></script>
+    <script type="text/javascript" src="./js/react-dom.development.js"></script>
+    <script type="text/javascript" src="./js/babel.min.js"></script>
+    <script type="text/javascript" src="./js/prop-types.js"></script>
+    <script type="text/babel">
+        /* class MyComponent extends React.Component{
+            render(){
+                return <ul>
+                        <li>{this.props.name}</li>
+                        <li>{this.props.age}</li>
+                        <li>{this.props.gender}</li>
+                    </ul>
+            }
+            //对属性的类型,必填,默认值进行限制(简写形式)
+            static propTypes = {
+                name:PropTypes.string.isRequired, 
+                age:PropTypes.number,
+                gender:PropTypes.string
+            }
+            static defaultProps ={
+                age:18
+            }
+        } */
+        function MyComponent (props) {
+            return <ul>
+                        <li>{props.name}</li>
+                        <li>{props.age}</li>
+                        <li>{props.gender}</li>
+                    </ul>
+        }
+        MyComponent.propTypes = {
+                name:PropTypes.string.isRequired, 
+                age:PropTypes.number,
+                gender:PropTypes.string
+            }
+        MyComponent.defaultProps ={
+            age:18
+        }
+        
+        let obj = {name:'rose',age:19,gender:'女'}
+        let obj1 = {age:19,gender:'女'}
+        let obj2 = {name:'rose',gender:'女'}
+        ReactDOM.render(<MyComponent {...obj2}/>,document.getElementById('test'))
+        
+    </script>
+</body>
+</html>

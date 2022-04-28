@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+    <script type="text/javascript" src="./js/react.development.js"></script>
+    <script type="text/javascript" src="./js/react-dom.development.js"></script>
+    <script type="text/javascript" src="./js/babel.min.js"></script>
+    <script type="text/javascript" src="./js/prop-types.js"></script>
+    <script type="text/babel">
+        class MyComponent extends React.Component{
+            render(){
+                return <div>
+                        <input ref="left" type="text"/>&nbsp;
+                        <button onClick={this.alertLeft}>点击显示左侧的值</button>&nbsp;
+                        <input ref="right" onBlur={this.alertRight} type="text"/>&nbsp;
+                    </div>
+            }
+            alertLeft = ()=>{
+                alert(this.refs.left.value)
+            }
+            alertRight = ()=>{
+                alert(this.refs.right.value)
+            }
+            //对属性的类型,必填,默认值进行限制(简写形式)
+            static propTypes = {
+                name:PropTypes.string.isRequired, 
+                age:PropTypes.number,
+                gender:PropTypes.string
+            }
+            static defaultProps ={
+                age:18
+            }
+        }
+        ReactDOM.render(<MyComponent/>,document.getElementById('test'))
+        
+    </script>
+</body>
+</html>

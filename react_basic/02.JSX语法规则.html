@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+    <script type="text/javascript" src="./js/react.development.js"></script>
+    <script type="text/javascript" src="./js/react-dom.development.js"></script>
+    <script type="text/javascript" src="./js/babel.min.js"></script>
+    <script type="text/babel">
+        /**
+         * 定义虚拟vdom,不要写引号
+         * 标签中混入js表达式时,要用{}
+         * vdom中不能些class,需要写成className
+         * vdom中style,不能写成style="color:red"的形式,需要写成style={{color:'red'}}
+         * vdom标签只能有一个根标签,不能写多个
+         * 标签必须闭合
+         * 标签首字母
+         *       (1)小写,则将该标签转换为对应的html同名标签,找不到同名标签,则报错
+         *       (2)大写,根据react的规则,首字母大写,则会取寻找对应的组件,如没有找到,则报错
+         * JSX中标签混入js表达式时,需要用{},且只能写js表达式,不要写js代码块,
+         *       (1)js表达式.凡是会产生新的值的,都叫js表达式,比如const a = 1,console.log(1),比较特殊的是function copy(){}也叫表达式.一定要注意
+         *       (2)js代码块.比如for(),if(),switch()这些,都叫做js代码块
+        */
+        const myId = 'testh1'
+        const myClass = 'testh1'
+
+        const VDOM = (
+            <h1 id={myId} className={myClass}>
+                <span>Hello,React</span>
+            </h1>
+        )
+        ReactDOM.render(VDOM,document.getElementById('test'))
+    </script>
+</body>
+</html>

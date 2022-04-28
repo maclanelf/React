@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+    <script type="text/javascript" src="./js/react.development.js"></script>
+    <script type="text/javascript" src="./js/react-dom.development.js"></script>
+    <script type="text/javascript" src="./js/babel.min.js"></script>
+    <script type="text/javascript" src="./js/prop-types.js"></script>
+    <script type="text/babel">
+    //传入的参数是个函数,或者函数的返回值是个函数,就叫高阶函数
+    //函数调用继续返回函数的方式进行编码,实现多次接收参数后统一处理的函数编码形式就是柯里化函数
+        class MyComponent extends React.Component{
+            state = {opacity:1}
+            destroy = ()=>{
+                //卸载节点函数
+                ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+            }
+            //挂载函数
+            componentDidMount() { 
+                this.timeInterval = setInterval(() => {
+                    let {opacity} = this.state
+                    opacity -= 0.1
+                    if (opacity<=0)  opacity = 1
+                    this.setState({opacity})
+                }, 200);    
+            }
+            //将要卸载函数
+            componentWillUnmount(){
+                clearInterval(this.timeInterval)
+            }
+            render(){
+                return (
+                    <div>
+                      <h3 style={{opacity:this.state.opacity}}>这是一段文本</h3> 
+                      <button onClick={this.destroy}>点击卸载组件</button> 
+                    </div>
+                )
+            }
+        }
+        
+        ReactDOM.render(<MyComponent/>,document.getElementById('test'))
+        
+    </script>
+</body>
+</html>
